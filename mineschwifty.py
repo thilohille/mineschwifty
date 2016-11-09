@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import print_function
-import json
 import yaml
 import requests
 
@@ -31,8 +30,7 @@ for i in (config['coins']):
         cost=config['powercost']
     )
     resp = requests.get(url=config.get('url')+str(config['coins'][i]['index'])+'.json', params=params)
-    data = json.loads(resp.text)
-    get_profit_index(i, data)
+    get_profit_index(i, resp.json())
 
 
 print(sortbuffer_key, sortbuffer_val)
