@@ -3,6 +3,8 @@ url: https://www.whattomine.com/coins/
 #powercost per kw in us$
 powercost: 0.33
 
+lastkey:
+statefilename: .state
 coins:
   Zcash:
     powerwall: 760

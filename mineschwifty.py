@@ -4,9 +4,15 @@ import yaml
 import requests
 
 f = open('mineschwifty.yml')
-# use safe_load instead load
 config = yaml.safe_load(f)
-f.close()
+
+# state file. contains the key of the curren coin
+try:
+    s = open(config['statefilename'],'rw+')
+    state = s.readline()
+except IOError:
+    s = open(config['statefilename'],'w+')
+    state=''
 
 sortbuffer_val = 0
 sortbuffer_key = ''
@@ -33,6 +39,10 @@ for i in (config['coins']):
     get_profit_index(i, resp.json())
 
 
-print(sortbuffer_key, sortbuffer_val)
-print(config['coins'][sortbuffer_key]['command_activate'])
-#exec(config['coins'][sortbuffer_key]['command_activate'])
+if sortbuffer_key != state:
+    state = sortbuffer_key
+    s.write(state)
+    print(sortbuffer_key, sortbuffer_val)
+    print(config['coins'][sortbuffer_key]['command_activate'])
+    #exec(config['coins'][sortbuffer_key]['command_activate'])
+f.close()
