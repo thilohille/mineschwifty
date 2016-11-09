@@ -1,6 +1,6 @@
 # mineschwifty
 
-mineschwifty is designed to switch crypto-currency miningsoftware based on the profit calculated bei whattomine.com.
+mineschwifty is designed to switch crypto-currency miningsoftware based on the profit calculated by whattomine.com.
 This is NOT completed and NOT tested yet.
 If you choose to use it, you use it at your own risk!
 
