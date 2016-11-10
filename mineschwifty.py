@@ -45,8 +45,8 @@ for i in (config['coins']):
     try:
         resp = requests.get(url=config.get('url')+str(config['coins'][i]['index'])+'.json', params=params)
         get_profit_index(i, resp.json())
-    except:
-        escalate('warning: failed to fetch wtm-data for %s.'%(i))
+    except Exception as e:
+        escalate('warning: failed to fetch wtm-data for %s (%s).'%(i,str(e)))
 
 
 if sortbuffer_key != current_state:
