@@ -17,6 +17,10 @@ except IOError:
 sortbuffer_val = 0
 sortbuffer_key = ''
 
+def control_miner(coin, command):
+    print(config['coins'][coin][command])
+    #exec(config['coins'][coin][command]);
+
 
 def get_profit_index(key, coin):
     """sort the coin by profit"""
@@ -40,9 +44,19 @@ for i in (config['coins']):
 
 
 if sortbuffer_key != state:
+    print(sortbuffer_key, sortbuffer_val)
+    #if we know the current miner, we stop it
+    if state in config['coins']:
+        control_miner(state,'command_stop')
+        #exec(config['coins'][state]['command_stop'])
+    else:
+        #try to stop all possible miners..
+        for c in config['coins']:
+            control_miner(c,'command_stop')
+            #exec(config['coins'][state]['command_stop'])
+    #then we start the new miner
+    control_miner(sortbuffer_key,'command_start')
     state = sortbuffer_key
     s.write(state)
-    print(sortbuffer_key, sortbuffer_val)
-    print(config['coins'][sortbuffer_key]['command_activate'])
-    #exec(config['coins'][sortbuffer_key]['command_activate'])
 f.close()
+
