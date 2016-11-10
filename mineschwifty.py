@@ -12,15 +12,18 @@ try:
     state = s.readline()
 except (IOError, ValueError):
     s = open(config['statefilename'], 'w+')
-    state = ''
+    state = 'nothing'
 
 sortbuffer_val = 0
 sortbuffer_key = ''
 
+def escalate(message):
+    #todo: bullet message? email?
+    print(message)
+
 def control_miner(coin, command):
     print(config['coins'][coin][command])
     #exec(config['coins'][coin][command]);
-
 
 def get_profit_index(key, coin):
     """sort the coin by profit"""
@@ -48,15 +51,19 @@ if sortbuffer_key != state:
     #if we know the current miner, we stop it
     if state in config['coins']:
         control_miner(state,'command_stop')
-        #exec(config['coins'][state]['command_stop'])
     else:
         #try to stop all possible miners..
         for c in config['coins']:
             control_miner(c,'command_stop')
-            #exec(config['coins'][state]['command_stop'])
-    #then we start the new miner
-    control_miner(sortbuffer_key,'command_start')
-    state = sortbuffer_key
+
+    #then we start the new miner if we have a profitable currency
+    if sortbuffer_val > 0:
+        escalate('mining: switched from %s to %s at aprox. $%0.2f'%(state,sortbuffer_key,sortbuffer_val));
+        control_miner(sortbuffer_key,'command_start')
+        state = sortbuffer_key
+    else:
+        escalate('not mining: no profitable currency found');
+        state = 'nothing'
     s.write(state)
 f.close()
 
