@@ -6,13 +6,13 @@ import requests
 f = open('mineschwifty.yml')
 config = yaml.safe_load(f)
 
-# state file. contains the key of the curren coin
+# state file. contains the key of the current coin
 try:
-    s = open(config['statefilename'],'rw+')
+    s = open(config['statefilename'], 'rw+')
     state = s.readline()
-except IOError:
-    s = open(config['statefilename'],'w+')
-    state=''
+except (IOError, ValueError):
+    s = open(config['statefilename'], 'w+')
+    state = ''
 
 sortbuffer_val = 0
 sortbuffer_key = ''
