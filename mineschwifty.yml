@@ -8,19 +8,19 @@ statefilename: .state
 
 coins:
   Zcash:
-    powerwall: 760
-    hashrate: 300
+    powerwall: 880
+    hashrate: 450
     index: 166
     command_start: cd C:\Users\ether\Downloads\ClaymoreZCash40 & zcash.bat
     command_stop: taskkill /F /IM ZecMiner64.exe;
   Ethereum:
-    powerwall: 800
+    powerwall: 1040
     hashrate: 180
     index: 151
     command_start: cd C:\Users\ether\Downloads\Claymore72 & eth.bat
     command_stop: taskkill /F /IM EthDcrMiner64.exe;
   EthereumClassic:
-    powerwall: 800
+    powerwall: 1040
     hashrate: 180
     index: 162
     command_start: cd C:\Users\ether\Downloads\Claymore72 & etc.bat
